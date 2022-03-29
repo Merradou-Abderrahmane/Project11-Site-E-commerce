@@ -27,12 +27,12 @@ class ProductManager {
 
         $productsArray = array();
         foreach($result as $resultValue){
-            $product = new Product();
-            $product->setId($resultValue["id"]);
-            $product->setName($resultValue["name"]);
-            $product->setPrice($resultValue["price"]);
+            $products = new Product();
+            $products->setId($resultValue["id"]);
+            $products->setName($resultValue["name"]);
+            $products->setPrice($resultValue["price"]);
 
-            array_push($productsArray, $product);
+            array_push($productsArray, $products);
         }
         return $productsArray;
 
@@ -40,13 +40,27 @@ class ProductManager {
 
     }
 
-    // 
+    // Display single product details ( in productDetails.php)
+    public function getProduct($id){
+        $selectedProduct = "SELECT * FROM WHERE id= '$id' ";
+        $productQuery = mysqli_query($this->connectToDB(), $selectedProduct);
+        $productResult = mysqli_fetch_all($productQuery, MYSQLI_ASSOC);
 
+        $productArray = array();
+        foreach($productResult as $productValue){
+            $product = new Product();
+            $product->setId($productValue['id']);
+            $product->setName($productValue['name']);
+            $product->setPrice($productValue['price']);
+
+            array_push($productArray, $product);
+        }
+
+        return $productArray;
+
+
+    }
     
-
-
-
-
 }
 
 
