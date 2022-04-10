@@ -1,0 +1,1 @@
+## templates contain all the files included in the project such as ( header footer nav bar ...)
