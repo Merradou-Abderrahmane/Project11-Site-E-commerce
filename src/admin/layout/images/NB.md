@@ -1,0 +1,1 @@
+## images on layout folder are the ones used for the design such as ( logo, background, others)
