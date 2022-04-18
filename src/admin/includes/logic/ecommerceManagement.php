@@ -29,10 +29,34 @@ class ECommerceManagement {
                 
        }
 
+       public function getAllCategories(){
+        $sqlGetData = 'SELECT * FROM category';
+        $result = mysqli_query($this->getConnection(), $sqlGetData);
+        $categoriesList = mysqli_fetch_all($result, MYSQLI_ASSOC);
+
+        $categories = array();
+
+        foreach($categoriesList as $categoryList){
+            $category = new ECommerce();
+            $category->setCategoryId($categoryList['id']);
+            $category->setCategoryName($categoryList['name']);
+            array_push($categories, $category);  
+        }
+        return $categories;
+    }
+
+       public function uploadImage($fileName, $tempName){
+
+        $folder = '../data/uploads/' .$fileName;
+        // Now let's move the uploaded image into the folder: image
+        move_uploaded_file($tempName, $folder);
+    }
+
+
        public function addProduct($product){
         $productName = $product->getProductName();
         $description = $product->getProductDescription();
-        $price = $product->getProductPrice();
+        $price = $product->getPrice();
         $stock = $product->getStock();
         $image = $product->getImage();
         $categoryId = $product->getCategoryId();
@@ -45,6 +69,9 @@ class ECommerceManagement {
 
         mysqli_query($this->getConnection(), $sqlInsertQuery);
     }
+
+
+
 
 }
 
