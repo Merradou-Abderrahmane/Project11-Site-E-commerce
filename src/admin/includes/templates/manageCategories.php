@@ -22,7 +22,7 @@ $data = $ecommerceManagemnt->getAllCategories();
     <nav class="sb-topnav navbar navbar-expand  ">
         <!-- Navbar Brand-->
         <div class='w-100'>
-            <img id="logo" class=" ms-3 rounded-circle" style="width:50px;" src="images/logo.png" alt="logo">
+            <img id="logo" class=" ms-3 rounded-circle" style="width:50px;" src="../../layout/images/logo.png" alt="logo">
 
             <a class="navbar-brand ps-3" id="top-title" href="index.php">Employee management</a>
             <a href="logOut.php" style="text-decoration: none; margin-left: 850px; "  > <i class="fa fa-sign-out" style="margin-right:5px;" aria-hidden="true"></i>log Out</a>
@@ -41,9 +41,9 @@ $data = $ecommerceManagemnt->getAllCategories();
                             <div class="sb-nav-link-icon"><i class="fa fa-fw fa-search"></i></div>
                             Find Employee <br>
                         </a>
-                        <a class="nav-link" href="insert.php">
+                        <a class="nav-link" href="addProduct.php">
                             <div class="sb-nav-link-icon"><i class="fa fa-fw fa-plus-circle"></i></div>
-                            Add Employee <br>
+                            Add Product <br>
                         </a>
                     </div>
                 </div>
@@ -56,7 +56,7 @@ $data = $ecommerceManagemnt->getAllCategories();
         <div id="layoutSidenav_content">
             <main>
                 <div class="container-fluid px-2">
-                    <h1 class="mt-4">👨‍💼Categories management</h1>
+                    <h1 class="mt-4">💄Categories management</h1>
                     <form method="GET">
                         <div class="card mt-4 ">
                             <div class="card-header">

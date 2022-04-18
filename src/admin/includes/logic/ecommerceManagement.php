@@ -66,6 +66,27 @@ class ECommerceManagement {
         mysqli_query($this->getConnection(), $sqlDeleteQuery);
     }
 
+    public function editCategory($id){
+
+        $categoryName = $category->getCategoryName();
+
+ 
+        // Update query
+        $sqlUpdateQuery = "UPDATE category SET 
+                            name='$registrationNumber',
+                            firstName='$firstName', 
+                            lastName='$lastName',
+                            birthDate='$birthDate',
+                            department='$department',
+                            salary='$salary', 
+                            occupation='$occupation',
+                            photo='$photo' 
+                            WHERE id=$id";
+ 
+         // Make query 
+         mysqli_query($this->getConnection(), $sqlUpdateQuery);
+   
+    }
 
        public function uploadImage($fileName, $tempName){
 
