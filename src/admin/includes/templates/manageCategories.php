@@ -1,7 +1,7 @@
 <?php
 require_once '../logic/ecommerceManagement.php';
 $ecommerceManagemnt = new ECommerceManagement();
-$data = $ecommerceManagemnt->getAllProducts();
+$data = $ecommerceManagemnt->getAllCategories();
 
 ?>
 
@@ -14,8 +14,8 @@ $data = $ecommerceManagemnt->getAllProducts();
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <script src="https://kit.fontawesome.com/110fb8b8a8.js" crossorigin="anonymous"></script>
     <title>Ecommerce Managemnt</title>
-    <link href="css/style.css" rel="stylesheet" />
-    <link rel="stylesheet" href="css/custom.css">
+	<link href="../../layout/css/style.css" rel="stylesheet" />
+	<link href="../../layout/css/custom.css" rel="stylesheet" />
 </head>
 
 <body class="sb-nav-fixed">
@@ -56,7 +56,7 @@ $data = $ecommerceManagemnt->getAllProducts();
         <div id="layoutSidenav_content">
             <main>
                 <div class="container-fluid px-2">
-                    <h1 class="mt-4">👨‍💼Employee management</h1>
+                    <h1 class="mt-4">👨‍💼Categories management</h1>
                     <form method="GET">
                         <div class="card mt-4 ">
                             <div class="card-header">
@@ -66,32 +66,20 @@ $data = $ecommerceManagemnt->getAllProducts();
                                 <table class="table">
                                     <thead id="table-head">
                                         <tr>
-                                            <th>Photo</th>
-                                            <th>Registration Number </th>
-                                            <th class="d-none d-lg-table-cell">First Name</th>
-                                            <th class="d-none d-lg-table-cell">Last Name</th>
-                                            <th class="d-none d-lg-table-cell">Birth Date</th>
-                                            <th class="d-none d-lg-table-cell">Department</th>
-                                            <th>Salary</th>
-                                            <th>Occupation</th>
+                                            <th>ID</th>
+                                            <th>Category Name </th>
                                             <th id="actions">Action</th>
                                         </tr>
                                     </thead>
                                     <?php
-                                    foreach ($data as $employee) {
+                                    foreach ($data as $category) {
                                     ?>
                                         <tr>
-                                            <td><img class="border rounded-circle" style="max-width:50px;" src="<?php echo 'images/' . $employee->getPhoto(); ?>"></td>
-                                            <td><?= $employee->getRegistrationNumber() ?></td>
-                                            <td><?= $employee->getFirstName() ?></td>
-                                            <td><?= $employee->getLastName() ?></td>
-                                            <td><?= $employee->getBirthDate() ?></td>
-                                            <td><?= $employee->getDepartment() ?></td>
-                                            <td><?= $employee->getSalary() ?></td>
-                                            <td><?= $employee->getOccupation() ?></td>
+                                            <td><?= $category->getCategoryId() ?></td>
+                                            <td><?= $category->getCategoryName() ?></td>
                                             <td>
-                                                <a href="edit.php?id=<?php echo $employee->getId() ?>" class="text-primary" style="text-decoration: none;"><i class="fa fa-fw fa-edit"></i>Edit</a> |
-                                                <a href="delete.php?id=<?php echo $employee->getId() ?>" class="text-danger" style="text-decoration: none;" onClick="return confirm('Are you sure you want to delete this employee ?');"><i class="fa fa-fw fa-trash"></i>Delete</a>
+                                                <a href="editCategory.php?id=<?php echo $category->getCategoryId() ?>" class="text-primary" style="text-decoration: none;"><i class="fa fa-fw fa-edit"></i>Edit</a> |
+                                                <a href="deleteCategory.php?id=<?php echo $category->getCategoryId() ?>" class="text-danger" style="text-decoration: none;" onClick="return confirm('Are you sure you want to delete this category ?');"><i class="fa fa-fw fa-trash"></i>Delete</a>
                                             </td>
                                         </tr>
                                     <?php } ?>

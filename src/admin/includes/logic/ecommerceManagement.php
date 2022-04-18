@@ -45,6 +45,28 @@ class ECommerceManagement {
         return $categories;
     }
 
+    public function getCategory($id){
+        $sqlGetQuery = "SELECT * FROM category WHERE id= $id";
+    
+        // get result
+        $result = mysqli_query($this->getConnection(), $sqlGetQuery);
+    
+        // fetch to array
+        $category_data = mysqli_fetch_assoc($result);
+
+        $category = new ECommerce();
+
+        $category->setCategoryId($category_data['id']);
+        $category->setCategoryName($category_data['registrationNumber']);
+        return $category;
+    }  
+
+    public function deleteCategory($id){
+        $sqlDeleteQuery = "DELETE FROM category WHERE id= $id";
+        mysqli_query($this->getConnection(), $sqlDeleteQuery);
+    }
+
+
        public function uploadImage($fileName, $tempName){
 
         $folder = '../data/uploads/' .$fileName;
