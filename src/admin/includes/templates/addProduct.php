@@ -1,12 +1,20 @@
 <?php
-require_once 'ecommerceManagement.php';
+require_once '../logic/ecommerceManagement.php';
 
 	if (!empty($_POST)) {
-		$categoryManager = new ECommerceManagement();
-		$category = new ECommerce();
-		$category->setCategoryName($_POST['categoryName']);
+		$ecommerceManagement = new ECommerceManagement();
+		$fileName = $_FILES["uploadedFile"]["name"];
+		$ecommerce = new ECommerce();
+		$ecommerce->setProductName($_POST['name']);
+		$ecommerce->setProductDescription($_POST['description']);
+		$ecommerce->setPrice($_POST['price']);
+		$ecommerce->setStock($_POST['stock']);
+		$ecommerce->setImage($fileName);
 
-		$categoryManager->addCategory($category);
+		$tempName = $_FILES["uploadedFile"]["tmp_name"];
+
+		$ecommerceManagement->addProduct($ecommerce);
+		$ecommerceManagement->uploadImage($fileName, $tempName);
 
 		header("Location: index.php");
 	}
@@ -20,10 +28,9 @@ require_once 'ecommerceManagement.php';
 	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 	<script src="https://kit.fontawesome.com/110fb8b8a8.js" crossorigin="anonymous"></script>
-	<title>Categories Management</title>
+	<title>kawaiiCosmetics management</title>
 	<link href="../../layout/css/style.css" rel="stylesheet" />
 	<link href="../../layout/css/custom.css" rel="stylesheet" />
-	<link rel="stylesheet" href="css/custom.css">
 </head>
 
 <body class="sb-nav-fixed">
@@ -33,7 +40,7 @@ require_once 'ecommerceManagement.php';
 			<div class='w-100'>
 				<img id="logo" class=" ms-3 rounded-circle" style="width:50px;" src="images/logo.png" alt="logo">
 
-				<a class="navbar-brand ps-3" id="top-title" href="index.php">Categories Management</a>
+				<a class="navbar-brand ps-3" id="top-title" href="index.php">kawaiiCosmetics.Inc</a>
 				<a href="logOut.php" style="text-decoration: none; margin-left: 850px; "  > <i class="fa fa-sign-out" style="margin-right:5px;" aria-hidden="true"></i>log Out</a>
 			</div>
 
@@ -66,7 +73,7 @@ require_once 'ecommerceManagement.php';
 		<div id="layoutSidenav_content">
 			<main>
 				<div class="container-fluid px-4">
-					<h1 class="mt-4"><i class="fa fa-fw fa-plus-circle"></i>Add Category</h1>
+					<h1 class="mt-4"><i class="fa fa-fw fa-plus-circle"></i>Add Product</h1>
 
 					<div id="formCard" class="card mb-4 ">
 
@@ -76,9 +83,44 @@ require_once 'ecommerceManagement.php';
 						<div class="card-body">
 							<form method="POST" enctype="multipart/form-data" id="formSubmit" class="row g-3">
 								<div class="col-md-6">
-									<label for="inputAuthor" class="form-label">Category Name</label>
-									<input type="text" required name="categoryName" class="form-control" id="inputAuthor">
+									<label for="inputAuthor" class="form-label">Product Name</label>
+									<input type="text" required name="name" class="form-control" id="inputAuthor">
 								</div>
+								<div class="col-6">
+									<label for="inputPrix" class="form-label">Product Description</label>
+									<input type="text" required name="description" class="form-control" id="inputPrix">
+								</div>
+								<div class="col-6">
+									<label for="inputDate" class="form-label">Price </label>
+									<input type="text" required name="price" class="form-control" id="inputDate">
+								</div>
+								<div class="col-6">
+									<label for="department" class="form-label">Stock </label>
+									<input type="number" required name="stock" class="form-control">
+								</div>
+								<div class="col-6">
+									<label for="photo" class="form-label">Product Image</label>
+									<input type="file" required name="image" class="form-control" value="">
+								</div>
+								<!--  -->
+								<div class="col-6">
+									<label for="productCategory" class="form-label">ProductCategory</label>
+
+									<?php 
+									$ecommerceManagement = new ECommerceManagement();
+									$data = $ecommerceManagement->getAllCategories();
+									foreach($data as $value){ ?>
+									<div class="form-check">
+									<input required class="form-check-input" name="Category" value="<?= $value->getIdCategory()?>"
+									type="radio" id="gridCheck">
+									<label for=""><?= $value->getCategoryName()?></label>
+																		
+									</div>
+									<?php } ?>
+									</div>
+
+								<!--  -->
+
 								<div class="col-12">
 									<button id="submitButton" type="submit" class="btn btn-primary-custom-2">💾Submit</button>
 								</div>
