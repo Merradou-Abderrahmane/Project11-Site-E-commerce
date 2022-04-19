@@ -39,7 +39,7 @@ class ECommerceManagement {
         
 
              // sql insert query
-        $sqlInsertQuery = "INSERT INTO product(`name`, `description`, `price`, `stock`, `image`, `category_id`)
+        $sqlInsertQuery = "INSERT INTO product(`name`, `description`, `price`, `stock`, `image`, `category_id`) 
                         VALUES('$productName','$description','$price','$stock','$image','$categoryId')";
                                 
 
